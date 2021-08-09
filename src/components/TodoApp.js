@@ -4,6 +4,7 @@ import Todos from './Todos';
 import AddTodo from './AddTodo';
 import Footer from '../store/containers/Footer';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 class TodoApp extends React.Component {
     state = {
@@ -33,17 +34,22 @@ class TodoApp extends React.Component {
 
     addTodo = (title) => {
         const todoData = {
+            id: uuidv4(),
             title: title,
             completed: false
         };
 
-        axios.post("https://jsonplaceholder.typicode.com/todos", todoData)
-            .then(response => {
-                console.log(response.data);
-                this.setState({
-                    todos: [...this.state.todos, response.data]
-                });
-            });
+        // axios.post("https://jsonplaceholder.typicode.com/todos", todoData)
+        //     .then(response => {
+        //         console.log(response.data);
+        //         this.setState({
+        //             todos: [...this.state.todos, response.data]
+        //         });
+        //     });
+
+        this.setState({
+            todos: [...this.state.todos, todoData]
+        });
     };
 
     componentDidMount() {
